@@ -4,6 +4,8 @@ RSpec.describe Api::V1::UsersController, type: :api do
   let(:user) { FactoryGirl.create(:user) }
   let(:serialized_user_response) { Api::V1::UserSerializer.new(user) }
 
+  before { sign_in(user) }
+
   describe '#show' do
     before { get api_v1_user_path(user.id) }
 
@@ -69,10 +71,12 @@ RSpec.describe Api::V1::UsersController, type: :api do
 
   describe '#create' do
     context 'when created successfully' do
-      let(:user) { FactoryGirl.build(:user) }
+      let(:unsaved_user) { FactoryGirl.build(:user) }
+      let(:serialized_user_response) { Api::V1::UserSerializer.new(User.last) }
+
       before do
         post api_v1_users_path(params: {
-          user: user.attributes.merge({
+          user: unsaved_user.attributes.merge({
             password: '12345',
             password_confirmation: '12345'
           }.stringify_keys)
@@ -84,7 +88,7 @@ RSpec.describe Api::V1::UsersController, type: :api do
       end
 
       it 'returns user details' do
-        expect(last_response.body).to eq(serialized_user_response.as_json.merge({ id: 1 }.stringify_keys).to_json)
+        expect(last_response.body).to eq(serialized_user_response.to_json)
       end
     end
 

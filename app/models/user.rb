@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # External Method Calls
   has_secure_password
+  has_secure_token :authentication_token
 
   # Validations
   validates :email, :first_name, presence: true
