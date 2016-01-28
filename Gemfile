@@ -4,6 +4,7 @@ gem 'rails',                       '5.0.0.beta1.1'
 gem 'sqlite3',                     '1.3.11'
 gem 'active_model_serializers',    '~> 0.9.4'
 gem 'bcrypt',                      '~> 3.1.7'
+gem 'cancancan',                   '~> 1.13.1'
 gem 'email_validator',             '~> 1.6.0'
 gem 'tzinfo-data',                 '~> 1.2.2', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'will_paginate',               '~> 3.1.0'

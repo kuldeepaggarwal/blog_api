@@ -7,6 +7,7 @@ require 'shoulda/matchers'
 require 'shoulda/callback/matchers'
 require 'faker'
 require 'simplecov'
+require 'cancan/matchers'
 
 SimpleCov.start 'rails' do
   add_filter 'vendor'

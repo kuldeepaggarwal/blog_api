@@ -51,6 +51,7 @@ GEM
     bcrypt (3.1.10)
     builder (3.2.2)
     byebug (8.2.1)
+    cancancan (1.13.1)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
@@ -199,6 +200,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.9.4)
   bcrypt (~> 3.1.7)
   byebug (~> 8.2.1)
+  cancancan (~> 1.13.1)
   database_cleaner (~> 1.5.1)
   email_validator (~> 1.6.0)
   factory_girl_rails (~> 4.5.0)

@@ -14,6 +14,22 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Callbacks' do
+    describe 'before_create' do
+      it "will be treated as Blogger, if don't have any role" do
+        user = FactoryGirl.build(:user)
+        expect(user).to_not be_blogger
+        user.save!
+        expect(user).to be_blogger
+      end
+
+      it 'will be treated as same as its role be' do
+        user = FactoryGirl.build(:user, :admin)
+        expect(user).to be_admin
+        user.save!
+        expect(user).to be_admin
+      end
+    end
+
     describe 'after_destroy' do
       it 'does not allow last user to be deleted' do
         subject.update_attributes(password: '12345', password_confirmation: '12345')

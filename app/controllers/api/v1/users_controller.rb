@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  before_action :set_resource, only: [:show, :update, :destroy]
+  load_and_authorize_resource
 
   def show
     render json: @user
@@ -41,10 +41,6 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   private
-    def set_resource
-      @user = User.find(params[:id])
-    end
-
     def resource_params
       params.require(:user)
       .permit(:email, :password, :password_confirmation, :first_name, :last_name)

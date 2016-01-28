@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :api do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, :admin) }
   let(:serialized_user_response) { Api::V1::UserSerializer.new(user) }
 
   before { sign_in(user) }

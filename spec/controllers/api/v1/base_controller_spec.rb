@@ -11,7 +11,11 @@ RSpec.describe Api::V1::BaseController do
 
   controller(described_class) do
     def index
-      raise ActiveRecord::RecordNotFound
+      if params[:unauthorized]
+        raise CanCan::AccessDenied
+      else
+        raise ActiveRecord::RecordNotFound
+      end
     end
   end
 
@@ -33,6 +37,19 @@ RSpec.describe Api::V1::BaseController do
 
     it 'returns 401 status code' do
       expect(response.status).to eq(401)
+    end
+  end
+
+  describe 'user authorization before filter' do
+    before { create_and_sign_in_user }
+    before { get :index, params: { unauthorized: true } }
+
+    it 'returns "Not authorized" error message' do
+      expect(response.body).to eq({ message: 'Not authorized' }.to_json)
+    end
+
+    it 'returns 403 status code' do
+      expect(response.status).to eq(403)
     end
   end
 end

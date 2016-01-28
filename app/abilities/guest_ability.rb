@@ -1,0 +1,2 @@
+class GuestAbility < Ability
+end
