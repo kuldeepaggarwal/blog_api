@@ -4,8 +4,13 @@ class Api::V1::BaseController < ApplicationController
   include PaginationHelpers
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from CanCan::AccessDenied, with: :unauthorized!
 
   before_action :authenticate_user!
+
+  def current_ability
+    @current_ability ||= Ability.for_user(current_user)
+  end
 
   private
     def authenticate_user!
@@ -18,6 +23,10 @@ class Api::V1::BaseController < ApplicationController
       else
         unauthenticated! and return
       end
+    end
+
+    def unauthorized!
+      render json: { message: 'Not authorized' }, status: 403
     end
 
     def unauthenticated!
