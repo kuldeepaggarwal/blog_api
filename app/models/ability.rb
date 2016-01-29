@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(_user)
     cannot [:index], User
     can [:show, :index], Blog
   end
