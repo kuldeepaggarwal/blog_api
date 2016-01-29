@@ -15,6 +15,7 @@ RSpec.describe User, type: :model do
 
   describe 'Associations' do
     it { should have_many(:blogs).dependent(:destroy) }
+    it { should have_many(:comments).dependent(:destroy) }
   end
 
   describe 'Callbacks' do

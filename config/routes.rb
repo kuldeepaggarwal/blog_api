@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :create, :show, :update, :destroy] do
         resources :blogs, only: [:create, :show, :update, :destroy], shallow: true
       end
+      resources :blogs, only: [] do
+        resources :comments, only: [:create, :update, :destroy, :index]
+      end
       resources :blogs, only: [:index]
     end
   end
