@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :blogs, dependent: :destroy
+  has_many :comments, dependent: :destroy, foreign_key: :creator_id
 
   # Validations
   validates :email, :first_name, presence: true
