@@ -2,6 +2,7 @@ module PaginationHelpers
   extend ActiveSupport::Concern
 
   private
+    # collection must be a pagination object
     def meta_attributes(collection)
       {
         current_page:  collection.current_page,
@@ -13,8 +14,10 @@ module PaginationHelpers
     end
 
     def paginate(collection, options = {})
-      collection
-      .page(params[:page] || options[:page])
-      .per_page(params[:per_page] || options[:per_page] || WillPaginate.per_page)
+      require 'will_paginate/array' if collection.is_a?(Array)
+      collection.paginate({
+        page: params[:page] || options[:page],
+        per_page: params[:per_page] || options[:per_page] || WillPaginate.per_page
+      })
     end
 end

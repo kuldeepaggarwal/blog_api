@@ -6,6 +6,9 @@ class User < ApplicationRecord
   # Enums
   enum role: { guest: 3, blogger: 4, admin: 5 }
 
+  # Associations
+  has_many :blogs, dependent: :destroy
+
   # Validations
   validates :email, :first_name, presence: true
   with_options allow_blank: true do

@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     cannot [:index], User
+    can [:show, :index], Blog
   end
 
   def self.for_user(user)

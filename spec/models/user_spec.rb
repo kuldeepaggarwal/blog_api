@@ -13,6 +13,10 @@ RSpec.describe User, type: :model do
     it { should allow_values('a@abc.com', 'kd@yahoo.co').for(:email) }
   end
 
+  describe 'Associations' do
+    it { should have_many(:blogs).dependent(:destroy) }
+  end
+
   describe 'Callbacks' do
     describe 'before_create' do
       it "will be treated as Blogger, if don't have any role" do
